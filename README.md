@@ -1,2 +1,2 @@
-# ahmad.banijamali-gmail.com
-Adaptive video streaming
+# Adaptive video streaming
+Adaptive video streaming scenario from Rover using Kuksa running on RPi3.
