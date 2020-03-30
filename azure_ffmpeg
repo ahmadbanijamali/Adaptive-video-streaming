@@ -1,0 +1,16 @@
+#!/bin/bash
+
+modprobe bcm2835-v4l2
+i=0
+while true
+do
+	. /home/pi/frame.txt
+	echo "framerate= $framerate"
+	echo "Scale= $scale"
+	echo "Turn = $i"
+	now=$(date +"%T")
+	echo "Current time = $now"
+	INGESTURI="rtmp://roverlive-smadrover-euwe.channel.media.azure.net:1935/live/f81f9ad5b90b420797db525b7809343a/system1"
+	ffmpeg -re -i /dev/video0 -vf scale=$scale -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3000k -bufsize 6000k -pix_fmt yuv420p -t 30 -r $framerate -g $twoframerate -f flv $INGESTURI
+	i=$((i+1))
+done
